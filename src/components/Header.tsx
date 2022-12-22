@@ -19,6 +19,7 @@ function Header() {
       <ButtonGroup variant="text" aria-label="text button group">
         <Button>Home</Button>
         <Button>Profile</Button>
+        <Button>Network</Button>
       </ButtonGroup>
     </Box>
   );
