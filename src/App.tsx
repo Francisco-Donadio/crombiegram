@@ -5,18 +5,21 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Start from "./components/Start";
 import Home from "./pages/Home";
+import ThemeContext from "./themes";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Start />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <ThemeContext>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Start />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeContext>
     </div>
   );
 }
