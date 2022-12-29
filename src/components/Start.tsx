@@ -1,5 +1,8 @@
+import { Box, Button, Container } from "@mui/material";
+import { Stack } from "@mui/system";
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Title from "./Title";
 
 function Start() {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -16,29 +19,35 @@ function Start() {
   };
 
   return (
-    <div className="home">
-      <div>
-        <img src="images/logo.png" alt="logo" className="logo" />
-      </div>
-      <div>
-        <h1 className="title">Crombiegram</h1>
-      </div>
-      <div className="home-buttons">
-        <div>
-          <Link to="/login" id="login">
-            <button type="submit" id="login" onClick={handleClick}>
+    <Container sx={{ mt: 9 }} maxWidth="xl">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          "& > *": {
+            m: 12,
+          },
+        }}
+      >
+        <div className="start-page">
+          <div>
+            <img src="images/logo.png" alt="logo" className="logo" />
+          </div>
+          <Title />
+          <Stack direction="row" spacing={2}>
+            <Button variant="outlined" href="/login" color="primary">
               Login
-            </button>
-          </Link>
+            </Button>
+            <Button variant="outlined" href="/register" color="secondary">
+              Register
+            </Button>
+          </Stack>
+
+          <Outlet />
         </div>
-        <Link to="/register" id="register">
-          <button type="submit" id="register" onClick={handleClick}>
-            Register
-          </button>
-        </Link>
-      </div>
-      <Outlet />
-    </div>
+      </Box>
+    </Container>
   );
 }
 

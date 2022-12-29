@@ -1,15 +1,12 @@
 import React from "react";
-import Header from "../components/Header";
 import Post from "../components/Post";
 import User from "../components/User";
 import Box from "@mui/material/Box";
+import { Container } from "@mui/material";
 
 function Home() {
   return (
-    <div>
-      <div>
-        <Header />
-      </div>
+    <Container sx={{ mt: 9 }} maxWidth="xl">
       <Box
         sx={{
           display: "flex",
@@ -19,6 +16,7 @@ function Home() {
             m: 1,
           },
           justifyContent: "center",
+          mt: 9,
         }}
       >
         <Box
@@ -48,7 +46,7 @@ function Home() {
           <User />
         </Box>
       </Box>
-    </div>
+    </Container>
   );
 }
 
