@@ -37,39 +37,10 @@ form input {
   font-weight: 300;
 }
 
-form button {
-  appearance: none;
-  outline: 0;
-  background-color: white;
-  border: 0;
-  padding: 10px 15px;
-  color: #fc427b;
-  border-radius: 3px;
-  width: 250px;
-  font-size: 18px;
-}
-
-.home button {
-  appearance: none;
-  outline: 0;
-  background-color: white;
-  border: 0;
-  padding: 10px 15px;
-  color: #fc427b;
-  border-radius: 3px;
-  width: 250px;
-  font-size: 18px;
-}
-
-.home-buttons {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
 .title {
-  font-family: "Billabong";
-  font-size: 60px;
-  margin-bottom: 50px;
+  font-family: "VT323";
+  font-size: 50px;
+  margin-bottom: 30px;
+  color: #fc427b;
+  padding-left: 40px;
 }
