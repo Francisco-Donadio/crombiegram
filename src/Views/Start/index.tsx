@@ -2,7 +2,7 @@ import { Box, Button, Container } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Title from "./Title";
+import Title from "../../components/Title";
 
 function Start() {
   const [isRegistered, setIsRegistered] = useState(false);

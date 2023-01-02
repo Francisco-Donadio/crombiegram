@@ -1,6 +1,6 @@
 import React from "react";
-import Post from "../components/Post";
-import User from "../components/User";
+import Post from "../../components/Post";
+import User from "../../components/User";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
 
