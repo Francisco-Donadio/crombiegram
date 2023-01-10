@@ -31,9 +31,15 @@ function Start() {
         }}
       >
         <div className="start-page">
-          <div>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <img src="images/logo.png" alt="logo" className="logo" />
-          </div>
+          </Box>
           <Title />
           <Stack direction="row" spacing={2}>
             <Button variant="outlined" href="/login" color="primary">

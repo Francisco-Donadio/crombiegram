@@ -38,7 +38,9 @@ function Login() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -46,69 +48,77 @@ function Login() {
   };
 
   return (
-    <Container sx={{ mt: 9 }} maxWidth="xl">
+    // <Container sx={{ mt: 9 }} maxWidth="xl">
+    <Box
+      sx={{
+        mt: 9,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <img src="images/logo.png" alt="logo" />
       <Box
+        component="form"
+        onSubmit={onSubmit}
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          "& > *": {
-            m: 1,
-          },
+          gap: "10px",
+          width: "400px",
         }}
       >
-        <img src="images/logo.png" alt="logo" className="logo" />
-        <form onSubmit={onSubmit}>
-          <div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <InputLabel
-                htmlFor="outlined-adornment-password"
-                {...register("email", { required: true })}
-              >
-                Email
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-email"
-                type={"text"}
-                label="Email"
-              />
-            </FormControl>
-          </div>
-          <div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <InputLabel
-                htmlFor="outlined-adornment-password"
-                {...register("password", { required: true })}
-              >
-                Password
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
-              />
-            </FormControl>
-          </div>
-          <div>
-            <Button variant="contained" color="primary">
-              Login
-            </Button>
-          </div>
-        </form>
+        <FormControl variant="outlined" fullWidth>
+          <InputLabel
+            htmlFor="outlined-adornment-password"
+            {...register("email", { required: true })}
+          >
+            Email
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-email"
+            type={"text"}
+            label="Email"
+            sx={{ width: "100%" }}
+          />
+        </FormControl>
+
+        <div>
+          <FormControl sx={{ width: "100%" }} variant="outlined">
+            <InputLabel
+              htmlFor="outlined-adornment-password"
+              {...register("password", { required: true })}
+            >
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+        </div>
+        <div>
+          <Button variant="contained" color="primary">
+            Login
+          </Button>
+        </div>
       </Box>
-    </Container>
+    </Box>
+    // </Container>
   );
 }
 

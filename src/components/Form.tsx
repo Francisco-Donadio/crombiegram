@@ -10,9 +10,6 @@ const Form = (props: { isRegistered: boolean }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          "& > *": {
-            m: 1,
-          },
         }}
       >
         <img src="images/logo.png" alt="logo" className="logo" />
