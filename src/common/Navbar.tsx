@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import ThemeSwitch from "../components/ThemeSwitch";
 
 const pages = ["Home", "Network", "Events"];
 const settings = ["Profile", "Account", "Logout"];
@@ -36,6 +37,13 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const [darkMode, setDarkMode] = React.useState(false);
+
+  const handleChange = () => {
+    setDarkMode(!darkMode);
+    console.log(darkMode, "light");
   };
 
   return (
@@ -128,6 +136,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
+            <ThemeSwitch onChange={handleChange} />
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="images/Yo.JPG" />

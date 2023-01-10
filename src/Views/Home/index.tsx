@@ -1,8 +1,9 @@
 import React from "react";
 import Post from "../../components/Post";
-import User from "../../components/User";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
+import "react-calendar/dist/Calendar.css";
+import Calendar from "react-calendar";
 
 function Home() {
   return (
@@ -13,7 +14,7 @@ function Home() {
           flexDirection: "row",
           alignItems: "center",
           "& > *": {
-            m: 1,
+            m: 3,
           },
           justifyContent: "center",
           mt: 9,
@@ -27,23 +28,23 @@ function Home() {
             "& > *": {
               m: 1,
             },
+            alignSelf: "flex-start",
           }}
         >
-          <Post />
-          <Post />
+          <Calendar />
         </Box>
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "right",
+            alignItems: "center",
             "& > *": {
               m: 1,
             },
-            alignSelf: "flex-start",
           }}
         >
-          <User />
+          <Post />
+          <Post />
         </Box>
       </Box>
     </Container>
