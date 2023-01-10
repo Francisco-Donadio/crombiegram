@@ -13,7 +13,19 @@ import { CardActionArea } from "@mui/material";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import IconButton from "@mui/material/IconButton";
 
-function Post() {
+type PostPropsType = {
+  firstName: string;
+  lastName: string;
+  contentText: string;
+  imageName?: string;
+};
+
+const Post: React.FC<PostPropsType> = ({
+  firstName,
+  lastName,
+  contentText,
+  imageName,
+}) => {
   return (
     <div className="postCard">
       <Card sx={{ maxWidth: 345 }}>
@@ -35,18 +47,15 @@ function Post() {
           <CardMedia
             component="img"
             height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
+            image={`https://crombiegram-s3.s3.sa-east-1.amazonaws.com/${imageName}`}
             alt="foto"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Primer Post
+              Titulo
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
+              {contentText}
             </Typography>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
@@ -61,6 +70,6 @@ function Post() {
       </Card>
     </div>
   );
-}
+};
 
 export default Post;
