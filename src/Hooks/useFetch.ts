@@ -11,7 +11,7 @@ const useFetch = () => {
   const { token } = useUserContext();
   return async ({ path, data, method }: FetchParams) => {
     try {
-      const response = await fetch(`http://localhost:3000/${path}`, {
+      const response = await fetch(`http://localhost:3000/api/${path}`, {
         body: JSON.stringify(data),
         method,
         headers: {

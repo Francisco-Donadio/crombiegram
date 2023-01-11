@@ -28,8 +28,10 @@ function Login() {
   console.log(errors);
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data);
+
     const jsonResponse = await handleFetch({
-      path: "login",
+      path: "auth/login",
       data,
       method: "POST",
     });
@@ -102,7 +104,7 @@ function Login() {
             </FormControl>
           </div>
           <div>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" type="submit">
               Login
             </Button>
           </div>

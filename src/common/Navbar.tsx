@@ -11,7 +11,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import ThemeSwitch from "../components/ThemeSwitch";
+import { Switch } from "@mui/material";
+import { useThemeColorContext } from "../Context/ColorModeContext";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const pages = ["Home", "Network", "Events"];
 const settings = ["Profile", "Account", "Logout"];
@@ -39,12 +42,7 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const [darkMode, setDarkMode] = React.useState(false);
-
-  const handleChange = () => {
-    setDarkMode(!darkMode);
-    console.log(darkMode, "light");
-  };
+  const { toggleColorMode, mode } = useThemeColorContext();
 
   return (
     <AppBar position="static">
@@ -123,7 +121,15 @@ function ResponsiveAppBar() {
           >
             Crombiegram
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 2,
+            }}
+          >
             {pages.map((page) => (
               <Button
                 variant="outlined"
@@ -136,7 +142,14 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <ThemeSwitch onChange={handleChange} />
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={toggleColorMode}
+              color="inherit"
+            >
+              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="images/Yo.JPG" />
