@@ -11,12 +11,13 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Switch } from "@mui/material";
-import { useThemeColorContext } from "../Context/ColorModeContext";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { Link } from "react-router-dom";
 import SwitchTheme from "../components/SwitchTheme";
+import Stack from "@mui/system/Stack";
+import HomeIcon from "@mui/icons-material/Home";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import GroupIcon from "@mui/icons-material/Group";
+import { Link } from "react-router-dom";
+import { useThemeColorContext } from "../Context/ColorModeContext";
 
 const pages = ["Home", "Network", "Events"];
 const settings = ["Profile", "Account", "Logout"];
@@ -44,18 +45,16 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const { toggleColorMode, mode } = useThemeColorContext();
+  const { mode } = useThemeColorContext();
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Avatar src="images/logo.png" variant="square" />
+          <Avatar src="images/crombie-logo.png" variant="square" />
 
           <Typography
             variant="h6"
-            // component="a"
-            // href="/"
             sx={{
               ml: 1,
               display: { xs: "none", md: "flex" },
@@ -66,9 +65,16 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            <Link to="/">Crombiegram</Link>
+            <Link to="/home" style={{ color: "#FFF" }}>
+              Crombiegram
+            </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -123,32 +129,45 @@ function ResponsiveAppBar() {
           >
             Crombiegram
           </Typography>
+
           <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "right",
               gap: 2,
             }}
           >
-            {pages.map((page) => (
-              <Button
-                variant="outlined"
-                key={page}
-                onClick={handleCloseNavMenu}
-              >
-                {page}
-              </Button>
-            ))}
+            <IconButton color="primary" key="home" onClick={handleCloseNavMenu}>
+              <HomeIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              color="primary"
+              key="events"
+              onClick={handleCloseNavMenu}
+            >
+              <CalendarMonthIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              color="primary"
+              key="network"
+              onClick={handleCloseNavMenu}
+            >
+              <GroupIcon fontSize="large" />
+            </IconButton>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <SwitchTheme></SwitchTheme>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="images/Yo.JPG" />
-              </IconButton>
-            </Tooltip>
+            <Stack spacing={3} direction="row">
+              <SwitchTheme />
+
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="images/Yo.JPG" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -173,7 +192,6 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
         </Toolbar>
-        <Typography>asdasdasd</Typography>
       </Container>
     </AppBar>
   );

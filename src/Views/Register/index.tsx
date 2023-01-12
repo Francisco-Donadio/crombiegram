@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  Box,
-  Button,
-  Container,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import TextField from "@mui/material/TextField";
 import useFetch from "../../Hooks/useFetch";
 import { useForm } from "react-hook-form";
 import Grid from "@mui/material/Grid";
@@ -120,7 +118,7 @@ function Register() {
             />
           </Grid>
         </Grid>
-        <Button variant="contained" color="secondary" type="submit">
+        <Button variant="outlined" color="secondary" type="submit">
           Register
         </Button>
       </Box>

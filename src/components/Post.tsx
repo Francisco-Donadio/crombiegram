@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { CardActionArea } from "@mui/material";
+import CardActionArea from "@mui/material/CardActionArea";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import IconButton from "@mui/material/IconButton";
 
