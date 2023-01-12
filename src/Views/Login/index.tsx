@@ -1,20 +1,20 @@
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import TextField from "@mui/material/TextField";
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../../Context/UserContext";
 import useFetch from "../../Hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 interface IFormInput {
   email: string;
   password: string;
@@ -23,6 +23,7 @@ interface IFormInput {
 function Login() {
   const handleFetch = useFetch();
   const { handleSetValues } = useUserContext();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -39,6 +40,7 @@ function Login() {
     });
     handleSetValues("token", jsonResponse.payload.token);
     localStorage.setItem("token", jsonResponse.payload.token);
+    setTimeout(() => navigate("/home"), 2000);
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -98,7 +100,7 @@ function Login() {
           />
         </FormControl>
 
-        <Button variant="contained" color="primary" type="submit">
+        <Button variant="outlined" color="primary" type="submit">
           Login
         </Button>
       </Box>

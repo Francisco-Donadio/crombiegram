@@ -1,5 +1,8 @@
-import { Box, Button, Container, Typography } from "@mui/material";
-import { Stack } from "@mui/system";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/system/Stack";
 import React, { useState } from "react";
 import { Outlet, Route } from "react-router-dom";
 import Title from "../../components/Title";
@@ -28,8 +31,8 @@ function Start() {
         alignItems: "center",
       }}
     >
-      <Box sx={{ alignSelf: "flex-end" }}>
-        <SwitchTheme></SwitchTheme>
+      <Box sx={{ alignSelf: "flex-end", mr: 2, mt: 2 }}>
+        <SwitchTheme />
       </Box>
       <img src="images/crombie-logo.png" alt="logo" className="logo" />
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RouterLayout from "../common/RouterLayout";
+import PrivateRoutes from "../Context/PrivateRoutes";
 import Home from "../Views/Home";
 import Login from "../Views/Login";
 import Register from "../Views/Register";
@@ -13,8 +14,10 @@ function Navigate() {
         <Route path="/" element={<Start />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<RouterLayout />}>
-          <Route path="/home" element={<Home />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/" element={<RouterLayout />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
