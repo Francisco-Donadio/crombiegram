@@ -13,7 +13,7 @@ function Navigate() {
         <Route path="/" element={<Start />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<RouterLayout />}>
+        <Route path="/" element={<RouterLayout />}>
           <Route path="/home" element={<Home />} />
         </Route>
       </Routes>

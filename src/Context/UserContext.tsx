@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import useFetch from "../Hooks/useFetch";
 
 const UserContext = React.createContext({
   firsName: "",
@@ -17,23 +18,16 @@ const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     email: "",
     token: localStorage.getItem("token") ?? "",
   });
+  const handleFetch = useFetch();
 
   const handleSetValues = (key: string, value: string) => {
     setValues((prev) => ({ ...prev, [key]: value }));
   };
-
   useEffect(() => {
     if (values.token) {
-      fetch("http://localhost:3000/me", {
+      const jsonResponse = handleFetch({
+        path: "user/me",
         method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${values.token}`,
-        },
-      }).then((response) => {
-        response.json().then((jsonResponse) => {
-          handleSetValues("email", jsonResponse.email);
-        });
       });
     }
   }, [values.token]);

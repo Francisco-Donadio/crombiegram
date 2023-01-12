@@ -15,6 +15,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../../Context/UserContext";
 import useFetch from "../../Hooks/useFetch";
+interface IFormInput {
+  email: string;
+  password: string;
+}
 
 function Login() {
   const handleFetch = useFetch();
@@ -28,8 +32,6 @@ function Login() {
   console.log(errors);
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-
     const jsonResponse = await handleFetch({
       path: "auth/login",
       data,
@@ -48,69 +50,59 @@ function Login() {
   };
 
   return (
-    <Container sx={{ mt: 9 }} maxWidth="xl">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        mt: 8,
+      }}
+    >
+      <img src="images/crombie-logo.png" alt="logo" className="logo" />
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          "& > *": {
-            m: 1,
-          },
-        }}
+        onSubmit={onSubmit}
+        component="form"
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <img src="images/logo.png" alt="logo" className="logo" />
-        <form onSubmit={onSubmit}>
-          <div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <InputLabel
-                htmlFor="outlined-adornment-password"
-                {...register("email", { required: true })}
-              >
-                Email
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-email"
-                type={"text"}
-                label="Email"
-              />
-            </FormControl>
-          </div>
-          <div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-              <InputLabel
-                htmlFor="outlined-adornment-password"
-                {...register("password", { required: true })}
-              >
-                Password
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
-              />
-            </FormControl>
-          </div>
-          <div>
-            <Button variant="contained" color="primary" type="submit">
-              Login
-            </Button>
-          </div>
-        </form>
+        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
+          <OutlinedInput
+            {...register("email", { required: true })}
+            // id="outlined-adornment-email"
+            type={"text"}
+            label="Email"
+          />
+        </FormControl>
+
+        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">
+            Password
+          </InputLabel>
+          <OutlinedInput
+            {...register("password", { required: true })}
+            id="outlined-adornment-password"
+            type={showPassword ? "text" : "password"}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
+
+        <Button variant="contained" color="primary" type="submit">
+          Login
+        </Button>
       </Box>
-    </Container>
+    </Box>
   );
 }
 
