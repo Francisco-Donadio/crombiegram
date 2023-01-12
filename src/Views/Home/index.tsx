@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 // import Calendar from "react-calendar";
 import NewPost from "../../components/NewPost";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 function Home() {
   return (
@@ -26,10 +26,7 @@ function Home() {
           alignItems: "center",
           alignSelf: "flex-start",
         }}
-      >
-        <Typography>asdasdasd</Typography>
-        {/* <Calendar /> */}
-      </Box>
+      ></Box>
       <Box
         sx={{
           display: "flex",
