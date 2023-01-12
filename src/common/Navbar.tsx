@@ -15,6 +15,8 @@ import { Switch } from "@mui/material";
 import { useThemeColorContext } from "../Context/ColorModeContext";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { Link } from "react-router-dom";
+import SwitchTheme from "../components/SwitchTheme";
 
 const pages = ["Home", "Network", "Events"];
 const settings = ["Profile", "Account", "Logout"];
@@ -49,13 +51,13 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Avatar src="images/logo.png" variant="square" />
+
           <Typography
             variant="h6"
-            noWrap
-            component="a"
-            href="/"
+            // component="a"
+            // href="/"
             sx={{
-              mr: 2,
+              ml: 1,
               display: { xs: "none", md: "flex" },
               fontFamily: "VT323",
               fontWeight: 700,
@@ -64,7 +66,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Crombiegram
+            <Link to="/">Crombiegram</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -135,21 +137,13 @@ function ResponsiveAppBar() {
                 variant="outlined"
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton
-              sx={{ ml: 1 }}
-              onClick={toggleColorMode}
-              color="inherit"
-            >
-              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-
+            <SwitchTheme></SwitchTheme>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="images/Yo.JPG" />
@@ -179,6 +173,7 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
         </Toolbar>
+        <Typography>asdasdasd</Typography>
       </Container>
     </AppBar>
   );

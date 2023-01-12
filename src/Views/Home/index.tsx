@@ -2,8 +2,10 @@ import React from "react";
 import Post from "../../components/Post";
 import Box from "@mui/material/Box";
 import "react-calendar/dist/Calendar.css";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 import NewPost from "../../components/NewPost";
+import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 function Home() {
   return (
@@ -12,9 +14,6 @@ function Home() {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        "& > *": {
-          m: 3,
-        },
         justifyContent: "center",
         mt: 9,
       }}
@@ -25,22 +24,17 @@ function Home() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          "& > *": {
-            m: 1,
-          },
           alignSelf: "flex-start",
         }}
       >
-        <Calendar />
+        <Typography>asdasdasd</Typography>
+        {/* <Calendar /> */}
       </Box>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          "& > *": {
-            m: 1,
-          },
         }}
       ></Box>
     </Box>

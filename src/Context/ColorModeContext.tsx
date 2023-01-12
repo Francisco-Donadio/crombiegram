@@ -2,13 +2,13 @@ import * as React from "react";
 
 export const ThemeColorContext = React.createContext({
   toggleColorMode: () => {},
-  mode: "light",
+  mode: "dark",
 });
 
 const ThemeColorProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const [mode, setMode] = React.useState<"light" | "dark">("dark");
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {

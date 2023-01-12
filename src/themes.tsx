@@ -20,28 +20,28 @@ const ThemeContext: React.FC<{ children: React.ReactNode }> = ({
 
   const theme = createTheme({
     palette: {
-      //mode as "dark"
-      mode: mode as "light",
-      background: {
-        default: themePalette.WHITE,
-      },
+      mode: mode as "dark",
       primary: {
         main: themePalette.PINK,
       },
       secondary: {
         main: themePalette.GREEN,
       },
+      text: {
+        primary: mode == "dark" ? themePalette.WHITE : themePalette.BG,
+      },
     },
     typography: {
       fontFamily: themePalette.FONT_GLOBAL,
       fontSize: 18,
     },
+
     components: {
       MuiButton: {
         defaultProps: {
           style: {
             textTransform: "none",
-            color: themePalette.WHITE,
+            color: mode == "dark" ? themePalette.WHITE : themePalette.BG,
             width: "150px",
           },
         },
