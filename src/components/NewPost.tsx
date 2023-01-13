@@ -21,10 +21,16 @@ import IconButton from "@mui/material/IconButton";
 import useFetch from "../Hooks/useFetch";
 
 const UserBox = styled(Box)({
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-  marginBottom: "20px",
+  // display: "flex",
+  // alignItems: "center",
+  // gap: "10px",
+  // marginBottom: "20px",
+  position: "absolute",
+  zIndex: 1,
+  top: -30,
+  left: 0,
+  right: 0,
+  margin: "0 auto",
 });
 
 const NewPost = () => {
@@ -70,7 +76,7 @@ const NewPost = () => {
         title="Crear Post"
         sx={{
           position: "fixed",
-          bottom: 20,
+          bottom: 30,
           right: { xs: "calc(50% - 25px)", md: 30 },
         }}
       >
