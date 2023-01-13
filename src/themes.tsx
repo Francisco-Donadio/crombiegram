@@ -11,6 +11,8 @@ export enum themePalette {
   PURPLE = "#8e44ad",
   YELLOW = "#f1c40f",
   GREY = "#a5b1c2",
+  GREY2 = "#95a5a6",
+  BLUE = "#273c75",
   FONT_GLOBAL = "'Noto Sans JP', sans-serif",
 }
 
@@ -31,7 +33,6 @@ const ThemeContext: React.FC<{ children: React.ReactNode }> = ({
             secondary: {
               main: themePalette.GREEN,
             },
-
             //Color de texto y de navbar
             text: {
               primary: themePalette.WHITE,
@@ -66,7 +67,7 @@ const ThemeContext: React.FC<{ children: React.ReactNode }> = ({
       MuiAppBar: {
         styleOverrides: {
           colorPrimary: {
-            backgroundColor: mode === "light" ? themePalette.GREY : "",
+            backgroundColor: mode === "light" ? themePalette.GREY2 : "",
           },
         },
       },

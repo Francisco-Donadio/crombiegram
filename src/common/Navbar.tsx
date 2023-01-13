@@ -1,4 +1,7 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
+import SwitchTheme from "../components/SwitchTheme";
+import { useThemeColorContext } from "../Context/ColorModeContext";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,13 +14,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import SwitchTheme from "../components/SwitchTheme";
 import Stack from "@mui/system/Stack";
 import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GroupIcon from "@mui/icons-material/Group";
-import { Link } from "react-router-dom";
-import { useThemeColorContext } from "../Context/ColorModeContext";
+import BottomAppBar from "../components/BottomAppBar";
 
 const pages = ["Home", "Network", "Events"];
 const settings = ["Profile", "Account", "Logout"];
@@ -75,7 +76,7 @@ function ResponsiveAppBar() {
               display: { xs: "flex", md: "none" },
             }}
           >
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -108,14 +109,13 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
+            <BottomAppBar />
           </Box>
 
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -127,7 +127,9 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Crombiegram
+            <Link to="/home" style={{ color: "#FFF" }}>
+              Crombiegram
+            </Link>
           </Typography>
 
           <Box
