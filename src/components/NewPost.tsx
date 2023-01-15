@@ -14,50 +14,34 @@ import DateRange from "@mui/icons-material/DateRange";
 import EmojiEmotions from "@mui/icons-material/EmojiEmotions";
 import Image from "@mui/icons-material/Image";
 import PersonAdd from "@mui/icons-material/PersonAdd";
-
 import Box from "@mui/system/Box";
 import IconButton from "@mui/material/IconButton";
 // import fetchAPI from "../lib/apiFetch";
 import useFetch from "../Hooks/useFetch";
+import { useUserContext } from "../Context/UserContext";
+import { useForm } from "react-hook-form";
 
-const UserBox = styled(Box)({
-  // display: "flex",
-  // alignItems: "center",
-  // gap: "10px",
-  // marginBottom: "20px",
-  position: "absolute",
-  zIndex: 1,
-  top: -30,
-  left: 0,
-  right: 0,
-  margin: "0 auto",
-});
+type NewPostProps = {
+  onAdd: () => void;
+};
 
-const NewPost = () => {
+const NewPost: React.FC<NewPostProps> = ({ onAdd }) => {
   const [open, setOpen] = useState(false);
+  const [file, setFile] = useState<File | null>();
+
+  const { firstName, lastName, profileImage } = useUserContext();
 
   const inputFile = useRef<any>(null);
-  const [file, setFile] = useState<File | null>();
-  console.log(file);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues: { contentText: "" } });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) return;
     setFile(e.target.files[0]);
   };
-
-  // useEffect(() => {
-  //   // fetchAPI("/post", {
-  //   //   method: "POST",
-  //   //   headers: {
-  //   //     "Content-Type": "application/json",
-  //   //   },
-  //   // }).then((data) => {
-  //   //   console.log(data);
-  //   // });
-  //   fetchAPI("/post").then((data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
 
   const handleImage = () => {
     let formData = new FormData(); //formdata object
@@ -69,6 +53,22 @@ const NewPost = () => {
     };
   };
 
+  const handleFetch = useFetch();
+  const onSubmit = handleSubmit(async (data) => {
+    const jsonResponse = await handleFetch({
+      path: "post",
+      data: { ...data, file },
+      method: "POST",
+    });
+
+    console.log("jsonResponse", jsonResponse);
+    if (jsonResponse) {
+      onAdd();
+    }
+
+    setOpen(false);
+  });
+
   return (
     <>
       <Tooltip
@@ -78,6 +78,7 @@ const NewPost = () => {
           position: "fixed",
           bottom: 30,
           right: { xs: "calc(50% - 25px)", md: 30 },
+          zIndex: 1111,
         }}
       >
         <Fab color="primary" aria-label="add">
@@ -85,49 +86,73 @@ const NewPost = () => {
         </Fab>
       </Tooltip>
       <Modal
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
         open={open}
         onClose={(e) => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box
-          width={400}
-          height={280}
+          component={"form"}
+          onSubmit={onSubmit}
           bgcolor={"background.default"}
           color={"text.primary"}
           p={3}
           borderRadius={5}
         >
-          <Typography variant="h6" color="gray" textAlign="center">
+          {/* <Typography variant="h6" color="gray" textAlign="center">
             Create post
-          </Typography>
-          <UserBox>
+          </Typography> */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              marginBottom: "15px",
+            }}
+          >
             <Avatar
-              src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={
+                "https://crombiegram-s3.s3.sa-east-1.amazonaws.com/" +
+                profileImage
+              }
               sx={{ width: 30, height: 30 }}
             />
-            <Typography fontWeight={500}>John Doe</Typography>
-          </UserBox>
+            <Typography fontWeight={500}>
+              {firstName} {lastName}
+            </Typography>
+          </Box>
+
           <TextField
+            {...register("contentText", { required: true })}
             sx={{ width: "100%" }}
             id="standard-multiline-static"
             multiline
-            rows={3}
+            // rows={3}
+            minRows={3}
+            maxRows={7}
             placeholder="What's on your mind?"
             variant="standard"
           />
           {file && (
-            <img
-              src={URL.createObjectURL(
-                new Blob([file], { type: "application/zip" })
-              )}
-              alt=""
-              width={200}
-              height={200}
-            />
+            <Box>
+              <img
+                src={URL.createObjectURL(
+                  new Blob([file], { type: "application/zip" })
+                )}
+                alt=""
+                width={150}
+                height={120}
+                style={{ marginTop: "15px" }}
+              />
+              <Button onClick={() => setFile(null)}>x</Button>
+            </Box>
           )}
-          <Stack direction="row" gap={1} mt={2} mb={3}>
+          <Stack direction="row" gap={1} mb={2}>
             <IconButton>
               <EmojiEmotions color="primary" />
             </IconButton>
@@ -146,16 +171,25 @@ const NewPost = () => {
               <PersonAdd color="error" />
             </IconButton>
           </Stack>
-          <ButtonGroup
-            fullWidth
-            variant="contained"
-            aria-label="outlined primary button group"
+          <Box
+            // variant="contained"
+            // size="medium"
+            // fullWidth
+            // aria-label="outlined primary button group"
+            sx={{
+              width: "100%",
+              display: "flex",
+              gap: 1,
+              justifyContent: "center",
+            }}
           >
-            <Button>Crear</Button>
-            <Button sx={{ width: "100px" }}>
+            <Button type="submit" variant="outlined">
+              Crear
+            </Button>
+            <Button variant="outlined">
               <DateRange />
             </Button>
-          </ButtonGroup>
+          </Box>
         </Box>
       </Modal>
     </>

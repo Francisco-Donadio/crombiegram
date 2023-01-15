@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import ThemeColorProvider from "./Context/ColorModeContext";
 import UserProvider from "./Context/UserContext";
 import Navigate from "./Navigate";
@@ -8,13 +9,15 @@ import ThemeContext from "./themes";
 function App() {
   return (
     <div className="App">
-      <UserProvider>
-        <ThemeColorProvider>
-          <ThemeContext>
-            <Navigate />
-          </ThemeContext>
-        </ThemeColorProvider>
-      </UserProvider>
+      <BrowserRouter>
+        <UserProvider>
+          <ThemeColorProvider>
+            <ThemeContext>
+              <Navigate />
+            </ThemeContext>
+          </ThemeColorProvider>
+        </UserProvider>
+      </BrowserRouter>
     </div>
   );
 }

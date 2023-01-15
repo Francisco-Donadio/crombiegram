@@ -4,24 +4,28 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/system/Stack";
 import React, { useState } from "react";
-import { Outlet, Route } from "react-router-dom";
+import { Navigate, Outlet, Route } from "react-router-dom";
 import Title from "../../components/Title";
 import { Link } from "react-router-dom";
 import SwitchTheme from "../../components/SwitchTheme";
+import { useUserContext } from "../../Context/UserContext";
 
 function Start() {
-  const [isRegistered, setIsRegistered] = useState(false);
+  // const [isRegistered, setIsRegistered] = useState(false);
 
-  const handleClick = (event: { currentTarget: { id: string } }) => {
-    if (event.currentTarget.id === "login") {
-      setIsRegistered(true);
-      console.log(isRegistered);
-    } else if (event.currentTarget.id === "register") {
-      setIsRegistered(false);
+  // const handleClick = (event: { currentTarget: { id: string } }) => {
+  //   if (event.currentTarget.id === "login") {
+  //     setIsRegistered(true);
+  //     console.log(isRegistered);
+  //   } else if (event.currentTarget.id === "register") {
+  //     setIsRegistered(false);
 
-      console.log(isRegistered);
-    }
-  };
+  //     console.log(isRegistered);
+  //   }
+  // };
+
+  const { token } = useUserContext();
+  if (token) return <Navigate to="/home" />;
 
   return (
     <Box

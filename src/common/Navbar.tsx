@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SwitchTheme from "../components/SwitchTheme";
 import { useThemeColorContext } from "../Context/ColorModeContext";
@@ -19,6 +19,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GroupIcon from "@mui/icons-material/Group";
 import BottomAppBar from "../components/BottomAppBar";
+import { useUserContext } from "../Context/UserContext";
+import useFetch from "../Hooks/useFetch";
 
 const pages = ["Home", "Network", "Events"];
 const settings = ["Profile", "Account", "Logout"];
@@ -47,6 +49,23 @@ function ResponsiveAppBar() {
   };
 
   const { mode } = useThemeColorContext();
+  const { firstName, profileImage, token, handleSetValues } = useUserContext();
+
+  const handleFetch = useFetch();
+  useEffect(() => {
+    if (token != "") {
+      const jsonResponse = handleFetch({
+        path: "user/me",
+        method: "GET",
+      }).then((res) => {
+        const { user } = res;
+        handleSetValues("firstName", user.firstName);
+        handleSetValues("lastName", user.lastName);
+        handleSetValues("email", user.email);
+        handleSetValues("profileImage", user.profileImage);
+      });
+    }
+  }, [token]);
 
   return (
     <AppBar position="static">
@@ -165,7 +184,13 @@ function ResponsiveAppBar() {
 
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="images/Yo.JPG" />
+                  <Avatar
+                    alt={firstName}
+                    src={
+                      "https://crombiegram-s3.s3.sa-east-1.amazonaws.com/" +
+                      profileImage
+                    }
+                  />
                 </IconButton>
               </Tooltip>
             </Stack>
