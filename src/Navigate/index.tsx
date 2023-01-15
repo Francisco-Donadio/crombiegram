@@ -4,6 +4,7 @@ import RouterLayout from "../common/RouterLayout";
 import PrivateRoutes from "../Context/PrivateRoutes";
 import Home from "../Views/Home";
 import Login from "../Views/Login";
+import Profile from "../Views/Profile";
 import Register from "../Views/Register";
 import Start from "../Views/Start";
 
@@ -17,6 +18,7 @@ function Navigate() {
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<RouterLayout />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Route>
       </Routes>
