@@ -8,10 +8,8 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/system/Stack";
@@ -22,7 +20,12 @@ import BottomAppBar from "../components/BottomAppBar";
 import { useUserContext } from "../Context/UserContext";
 import useFetch from "../Hooks/useFetch";
 
-const pages = ["Home", "Network", "Events"];
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import { styled, alpha } from "@mui/material/styles";
+import { Button } from "@mui/material";
+import useFetch from "../Hooks/useFetch";
+
 const settings = ["Profile", "Account", "Logout"];
 
 function ResponsiveAppBar() {
@@ -67,6 +70,55 @@ function ResponsiveAppBar() {
     }
   }, [token]);
 
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
+    },
+  }));
+
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("md")]: {
+        width: "20ch",
+      },
+    },
+  }));
+  const handleFetch = useFetch();
+
+  const handleLogout = async () => {
+    const jsonResponse = handleFetch({
+      path: "auth/login",
+      method: "DELETE",
+    });
+    localStorage.removeItem("token");
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -88,6 +140,15 @@ function ResponsiveAppBar() {
             <Link to="/home" style={{ color: "#FFF" }}>
               Crombiegram
             </Link>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
           </Typography>
           <Box
             sx={{
@@ -95,40 +156,6 @@ function ResponsiveAppBar() {
               display: { xs: "flex", md: "none" },
             }}
           >
-            {/* <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
             <BottomAppBar />
           </Box>
 
@@ -144,6 +171,7 @@ function ResponsiveAppBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              justifyContent: "center",
             }}
           >
             <Link to="/home" style={{ color: "#FFF" }}>
@@ -160,7 +188,12 @@ function ResponsiveAppBar() {
               gap: 2,
             }}
           >
-            <IconButton color="primary" key="home" onClick={handleCloseNavMenu}>
+            <IconButton
+              color="primary"
+              key="home"
+              onClick={handleCloseNavMenu}
+              href="/home"
+            >
               <HomeIcon fontSize="large" />
             </IconButton>
             <IconButton
@@ -211,11 +244,18 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key="profile" onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">
+                  <Button href="/profile">Profile</Button>
+                </Typography>
+              </MenuItem>
+              <MenuItem key="logout" onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">
+                  <Button href="/" onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

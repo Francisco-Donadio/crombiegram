@@ -13,6 +13,7 @@ const ThemeColorProvider: React.FC<{ children: React.ReactNode }> = ({
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        localStorage.setItem("mode", mode);
       },
     }),
     []
