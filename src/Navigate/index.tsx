@@ -10,19 +10,20 @@ import Start from "../Views/Start";
 
 function Navigate() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Start />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="/" element={<RouterLayout />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
+
+    // <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Start />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route element={<PrivateRoutes />}>
+        <Route path="/" element={<RouterLayout />}>
+          <Route path="/home" element={<Home />} />
+
         </Route>
-      </Routes>
-    </BrowserRouter>
+      </Route>
+    </Routes>
+    // </BrowserRouter>
   );
 }
 

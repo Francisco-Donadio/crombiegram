@@ -38,7 +38,7 @@ const BottomAppBar = () => {
             gap: 7,
           }}
         >
-          <NewPost />
+          {/* <NewPost /> */}
 
           <IconButton color="primary" key="network">
             <GroupIcon fontSize="large" />

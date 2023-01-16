@@ -31,7 +31,6 @@ function Register() {
 
     setAlert(jsonResponse.message);
     setTimeout(() => navigate("/login"), 2000);
-    console.log(jsonResponse);
   });
   return (
     <Box
