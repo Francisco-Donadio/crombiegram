@@ -4,7 +4,7 @@ import { useUserContext } from "./UserContext";
 
 const PrivateRoutes = () => {
   const { token } = useUserContext();
-  if (!token) return <Navigate to="/home" />;
+  if (!token) return <Navigate to="/" />;
   return <Outlet />;
 };
 

@@ -10,7 +10,6 @@ import Start from "../Views/Start";
 
 function Navigate() {
   return (
-
     // <BrowserRouter>
     <Routes>
       <Route path="/" element={<Start />} />
@@ -19,7 +18,7 @@ function Navigate() {
       <Route element={<PrivateRoutes />}>
         <Route path="/" element={<RouterLayout />}>
           <Route path="/home" element={<Home />} />
-
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Route>
     </Routes>

@@ -18,34 +18,35 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GroupIcon from "@mui/icons-material/Group";
 import BottomAppBar from "../components/BottomAppBar";
 import { useUserContext } from "../Context/UserContext";
-import useFetch from "../Hooks/useFetch";
-
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
-import { Button } from "@mui/material";
+import { Button, ListItemIcon } from "@mui/material";
 import useFetch from "../Hooks/useFetch";
+import { Logout } from "@mui/icons-material";
 
-const settings = ["Profile", "Account", "Logout"];
+// const settings = ["Profile", "Account", "Logout"];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+  // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+  //   null
+  // );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    console.log(event.currentTarget);
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -77,13 +78,14 @@ function ResponsiveAppBar() {
     "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
+    // marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
+    maxWidth: "800px",
+    // [theme.breakpoints.up("sm")]: {
+    //   marginLeft: theme.spacing(3),
+    //   width: "auto",
+    // },
   }));
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -105,31 +107,40 @@ function ResponsiveAppBar() {
       transition: theme.transitions.create("width"),
       width: "100%",
       [theme.breakpoints.up("md")]: {
-        width: "20ch",
+        // width: "20ch",
       },
     },
   }));
-  const handleFetch = useFetch();
 
-  const handleLogout = async () => {
-    const jsonResponse = handleFetch({
-      path: "auth/login",
-      method: "DELETE",
-    });
+  const handleLogout = () => {
+    // const jsonResponse = handleFetch({
+    //   path: "auth/login",
+    //   method: "DELETE",
+    // });
     localStorage.removeItem("token");
   };
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      {/* <Container maxWidth="xl"> */}
+      <Toolbar
+        disableGutters
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          pl: 2,
+          pr: 2,
+        }}
+      >
+        <Box sx={{ display: "flex" }}>
           <Avatar src="images/crombie-logo.png" variant="square" />
-
           <Typography
             variant="h6"
             sx={{
               ml: 1,
-              display: { xs: "none", md: "flex" },
+              display: { xs: "none", md: "inherit" },
               fontFamily: "VT323",
               fontWeight: 700,
               letterSpacing: ".3rem",
@@ -140,58 +151,47 @@ function ResponsiveAppBar() {
             <Link to="/home" style={{ color: "#FFF" }}>
               Crombiegram
             </Link>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-          </Typography>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-            }}
-          >
-            <BottomAppBar />
-          </Box>
-
-          <Typography
-            variant="h5"
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "VT323",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-              justifyContent: "center",
-            }}
-          >
-            <Link to="/home" style={{ color: "#FFF" }}>
-              Crombiegram
-            </Link>
-          </Typography>
-
+          </Typography>{" "}
+        </Box>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: { xs: "flex", md: "none" },
+          }}
+        >
+          <BottomAppBar />
+        </Box>
+        <Box
+          sx={{
+            // width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
           <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
-              alignItems: "center",
-              justifyContent: "right",
-              gap: 2,
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              // gap: 2,
+              maxWidth: 200,
             }}
           >
             <IconButton
               color="primary"
               key="home"
-              onClick={handleCloseNavMenu}
+              // onClick={handleCloseNavMenu}
               href="/home"
             >
               <HomeIcon fontSize="large" />
@@ -199,19 +199,27 @@ function ResponsiveAppBar() {
             <IconButton
               color="primary"
               key="events"
-              onClick={handleCloseNavMenu}
+              // onClick={handleCloseNavMenu}
             >
               <CalendarMonthIcon fontSize="large" />
             </IconButton>
             <IconButton
               color="primary"
               key="network"
-              onClick={handleCloseNavMenu}
+              // onClick={handleCloseNavMenu}
             >
               <GroupIcon fontSize="large" />
             </IconButton>
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            sx={{
+              // width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              // alignItems: "flex-end",
+              justifyContent: "flex-end",
+            }}
+          >
             <Stack spacing={3} direction="row">
               <SwitchTheme />
 
@@ -220,8 +228,10 @@ function ResponsiveAppBar() {
                   <Avatar
                     alt={firstName}
                     src={
-                      "https://crombiegram-s3.s3.sa-east-1.amazonaws.com/" +
                       profileImage
+                        ? "https://crombiegram-s3.s3.sa-east-1.amazonaws.com/" +
+                          profileImage
+                        : ""
                     }
                   />
                 </IconButton>
@@ -244,22 +254,34 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key="profile" onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
+              {/* <MenuItem key="profile" onClick={handleCloseUserMenu}> */}
+              <MenuItem key="profile">
+                <Link to={"/profile"}>
+                  {/* <Typography textAlign="center"> */}
                   <Button href="/profile">Profile</Button>
-                </Typography>
+                  {/* Profile */}
+                  {/* </Typography> */}
+                </Link>
               </MenuItem>
-              <MenuItem key="logout" onClick={handleCloseUserMenu}>
+              {/* <MenuItem key="logout" onClick={handleCloseUserMenu}> */}
+              {/* <MenuItem key="logout">
                 <Typography textAlign="center">
                   <Button href="/" onClick={handleLogout}>
                     Logout
                   </Button>
                 </Typography>
+              </MenuItem> */}
+              <MenuItem onClick={handleLogout}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                Logout
               </MenuItem>
             </Menu>
           </Box>
-        </Toolbar>
-      </Container>
+        </Box>
+      </Toolbar>
+      {/* </Container> */}
     </AppBar>
   );
 }

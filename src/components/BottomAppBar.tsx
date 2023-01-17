@@ -8,6 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 import { Toolbar } from "@mui/material";
 import NewPost from "./NewPost";
+import { Link } from "react-router-dom";
 
 const BottomAppBar = () => {
   return (
@@ -22,12 +23,16 @@ const BottomAppBar = () => {
             gap: 7,
           }}
         >
-          <IconButton color="primary" key="home">
-            <HomeIcon fontSize="large" />
-          </IconButton>
-          <IconButton color="primary" key="events">
-            <CalendarMonthIcon fontSize="large" />
-          </IconButton>
+          <Link to={"/home"}>
+            <IconButton color="primary" key="home">
+              <HomeIcon fontSize="large" />
+            </IconButton>
+          </Link>
+          <Link to={"/home"}>
+            <IconButton color="primary" key="events">
+              <CalendarMonthIcon fontSize="large" />
+            </IconButton>
+          </Link>
         </Box>
         <Box
           sx={{
@@ -38,14 +43,16 @@ const BottomAppBar = () => {
             gap: 7,
           }}
         >
-          {/* <NewPost /> */}
-
-          <IconButton color="primary" key="network">
-            <GroupIcon fontSize="large" />
-          </IconButton>
-          <IconButton color="primary" key="search">
-            <SearchIcon fontSize="large" />
-          </IconButton>
+          <Link to={"/home"}>
+            <IconButton color="primary" key="network">
+              <GroupIcon fontSize="large" />
+            </IconButton>
+          </Link>
+          <Link to={"/home"}>
+            <IconButton color="primary" key="search">
+              <SearchIcon fontSize="large" />
+            </IconButton>
+          </Link>
         </Box>
       </Toolbar>
     </AppBar>

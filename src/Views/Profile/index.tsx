@@ -6,20 +6,28 @@ import CardMedia from "@mui/material/CardMedia";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Edit from "@mui/icons-material/Edit";
+import { useUserContext } from "../../Context/UserContext";
 
 const Profile = () => {
+  const { firstName, lastName, profileImage } = useUserContext();
+
   return (
-    <Box>
+    <Box
+      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+    >
       <Card
         sx={{
           borderRadius: 5,
+          m: 1,
           mt: 5,
-          ml: "20%",
-          mr: "20%",
+          maxWidth: 700,
+          width: "100%",
+          // ml: "20%",
+          // mr: "20%",
         }}
         elevation={10}
       >
-        <Image
+        {/* <Image
           src="images/colors.png"
           height={250}
           width={1250}
@@ -32,22 +40,41 @@ const Profile = () => {
           distance="100px"
           shiftDuration={900}
           bgColor="inherit"
-        />
+        
+        /> */}
+        {/* 
         <CardMedia
-          image="images/Yo.JPG"
+          image="images/colors.png"
           sx={{
-            height: 150,
-            width: 150,
+            height: { sm: 200, xs: 150 },
+            width: "100%",
+          }}
+        /> */}
+        <img src="images/colors.png" height={150} width={"100%"} />
+
+        <CardMedia
+          image={
+            profileImage
+              ? `https://crombiegram-s3.s3.sa-east-1.amazonaws.com/${profileImage}`
+              : ""
+          }
+          sx={{
+            position: "relative",
+
+            height: { sm: 150, xs: 100 },
+            width: { sm: 150, xs: 100 },
             borderRadius: 50,
             border: 5,
             borderColor: "#8e44ad",
             ml: 5,
-            mt: 1,
+            mt: -9,
           }}
           title="profile"
         />
         <Box sx={{ m: 5 }}>
-          <Typography variant="h5">Francisco Donadio</Typography>
+          <Typography variant="h5">
+            {firstName} {lastName}
+          </Typography>
           <Typography>Full Stack Developer</Typography>
         </Box>
         <Fab
@@ -55,7 +82,7 @@ const Profile = () => {
           aria-label="edit"
           sx={{
             position: "relative",
-            ml: "90%",
+            ml: { sm: "90%", xs: "87%" },
             mb: 1,
           }}
         >
