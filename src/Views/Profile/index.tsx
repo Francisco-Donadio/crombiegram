@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "mui-image";
 import Box from "@mui/system/Box";
 import Card from "@mui/material/Card";
@@ -6,8 +6,30 @@ import CardMedia from "@mui/material/CardMedia";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Edit from "@mui/icons-material/Edit";
+import { useUserContext } from "../../Context/UserContext";
+import useFetch from "../../Hooks/useFetch";
+import userEvent from "@testing-library/user-event";
 
 const Profile = () => {
+  const { firstName, lastName, profileImage, token, handleSetValues } =
+    useUserContext();
+
+  const handleFetch = useFetch();
+  useEffect(() => {
+    if (token !== "") {
+      const jsonResponse = handleFetch({
+        path: "user/me",
+        method: "GET",
+      }).then((res) => {
+        const { user } = res;
+        handleSetValues("firstName", user.firstName);
+        handleSetValues("lastName", user.lastName);
+        handleSetValues("email", user.email);
+        handleSetValues("profileImage", user.profileImage);
+      });
+    }
+  }, [token]);
+
   return (
     <Box>
       <Card
@@ -34,7 +56,7 @@ const Profile = () => {
           bgColor="inherit"
         />
         <CardMedia
-          image="images/Yo.JPG"
+          image={profileImage}
           sx={{
             height: 150,
             width: 150,
@@ -47,7 +69,9 @@ const Profile = () => {
           title="profile"
         />
         <Box sx={{ m: 5 }}>
-          <Typography variant="h5">Francisco Donadio</Typography>
+          <Typography variant="h5">
+            {firstName} {lastName}
+          </Typography>
           <Typography>Full Stack Developer</Typography>
         </Box>
         <Fab

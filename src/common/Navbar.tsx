@@ -18,7 +18,6 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GroupIcon from "@mui/icons-material/Group";
 import BottomAppBar from "../components/BottomAppBar";
 import { useUserContext } from "../Context/UserContext";
-import useFetch from "../Hooks/useFetch";
 
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
@@ -109,7 +108,6 @@ function ResponsiveAppBar() {
       },
     },
   }));
-  const handleFetch = useFetch();
 
   const handleLogout = async () => {
     const jsonResponse = handleFetch({
